@@ -18,4 +18,4 @@ curl -so "${TMPFILE}" "https://slack.com/api/emoji.list" --data-urlencode "token
 # was successful.
 jq .ok -e < "$TMPFILE" >/dev/null
 
-jq '.emoji | to_entries | map(.key + ": " + .value) | .[]' -Sr < "$TMPFILE" | sort
+jq '.emoji | to_entries | map(.key + " " + .value) | .[]' -Sr < "$TMPFILE" | sort
