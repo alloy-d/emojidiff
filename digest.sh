@@ -3,11 +3,13 @@
 SINCE="$1"
 
 START=$(git rev-list --since "$SINCE" --reverse master | head -n 1)
+PRETTY_SINCE=$(date -j -f "%Y-%m-%dT%H:%M" "${SINCE}" +"%Y-%m-%d")
+echo "*EMOJI DIGEST! (v0.0.2)*"
+echo "New emoji since ${PRETTY_SINCE}:"
 git diff "${START}^..master" -- list.txt | grep '^[+-][^+-]' | awk '
 BEGIN {
   imagematcher = "https:.+"
   aliasmatcher = "alias:.+"
-  print "*EMOJI DIGEST v0.0.1*"
 }
 match ($2, imagematcher) {
   name = substr($1, 2)
